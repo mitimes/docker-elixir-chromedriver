@@ -1,4 +1,4 @@
-FROM elixir:1.7
+FROM elixir:1.5
 
 # Update and install base tools & libs
 RUN \
