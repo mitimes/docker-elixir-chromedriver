@@ -30,6 +30,15 @@ RUN \
   npm config set unsafe-perm true && \
   npm install -g yarn
 
-RUN apt-get install -y chromedriver chromium xvfb
+# Set the locale
+run apt-get install -y locales
+
+RUN sed -i -e 's/# \(en_AU\.UTF-8 .*\)/\1/' /etc/locale.gen && \
+    locale-gen en_AU.UTF-8
+ENV LANG en_AU.UTF-8
+ENV LANGUAGE en_AU:en
+ENV LC_ALL en_AU.UTF-8
+
+RUN apt-get install -y chromedriver chromium chromium-l10n xvfb
 
 WORKDIR /app
