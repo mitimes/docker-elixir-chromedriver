@@ -39,6 +39,8 @@ ENV LANG en_AU.UTF-8
 ENV LANGUAGE en_AU:en
 ENV LC_ALL en_AU.UTF-8
 
-RUN apt-get install -y chromedriver chromium chromium-l10n xvfb
+# Second line are dependencies for Cypress + xvfb.
+RUN apt-get install -y chromedriver chromium chromium-l10n xvfb \
+  libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 
 WORKDIR /app
