@@ -1,4 +1,4 @@
-FROM elixir:1.8
+FROM elixir:1.8-otp-22
 
 # Update and install base tools & libs
 RUN \
