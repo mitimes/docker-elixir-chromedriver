@@ -17,9 +17,8 @@ RUN mix do \
 # Install node
 #
 #
-# Node.js (>= 8.0.0) and NPM in order to satisfy brunch.io dependencies
-# See https://hexdocs.pm/phoenix/installation.html#node-js-5-0-0
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - && \
+# Node.js and NPM in order to satisfy brunch.io dependencies
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   apt-get install -y inotify-tools nodejs
 
 # Create a default user
