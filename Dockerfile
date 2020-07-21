@@ -79,4 +79,8 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     apt-get -yqq install google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
+# Seems to be required or ELM builds can fail with
+#    FailedConnectionException2 "github.com" 443 True getProtocolByName: does not exist (no such protocol name: tcp)
+RUN apt-get -yqq install netbase
+
 WORKDIR /app
