@@ -4,14 +4,14 @@ FROM elixir:1.8-otp-22
 #
 # Add Elixir tools hex and rebar
 # ... and libs required when building code from Elixir packages
-#
+# ... and netcat for scripts
 #
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y \
     unzip curl wget git make build-essential libfontconfig1 \
-    erlang-tools
+    erlang-tools netcat
 
 RUN mix do \
   local.hex --force, \
