@@ -23,7 +23,7 @@ RUN mix do \
 #
 #
 # Node.js and NPM in order to satisfy brunch.io dependencies
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
   apt-get install -y inotify-tools nodejs
 
 # Create a default user
