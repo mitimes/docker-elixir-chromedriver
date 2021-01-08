@@ -1,4 +1,4 @@
-FROM elixir:1.8-otp-22
+FROM elixir:1.11
 
 #
 #
