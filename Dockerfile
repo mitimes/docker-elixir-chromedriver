@@ -5,13 +5,16 @@ FROM elixir:1.11
 # Add Elixir tools hex and rebar
 # ... and libs required when building code from Elixir packages
 # ... and netcat for scripts
-#
+# ... postgresql-client for ecto.load sql schema
+# ... netbase - for ELM builds, else fails withFailedConnectionException2 "github.com" 443 True getProtocolByName: does not exist (no such protocol name: tcp)
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y \
     unzip curl wget git make build-essential libfontconfig1 \
-    erlang-tools netcat
+    erlang-tools netcat \
+    postgresql-client \
+    netbase
 
 RUN mix do \
   local.hex --force, \
@@ -34,7 +37,6 @@ RUN \
   npm config set unsafe-perm true && \
   npm install -g yarn
 
-
 #
 #
 # Set the locale
@@ -46,7 +48,6 @@ RUN sed -i -e 's/# \(en_AU\.UTF-8 .*\)/\1/' /etc/locale.gen && \
 ENV LANG en_AU.UTF-8
 ENV LANGUAGE en_AU:en
 ENV LC_ALL en_AU.UTF-8
-
 
 #
 #
@@ -79,8 +80,5 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     apt-get -yqq install google-chrome-stable && \
     rm -rf /var/lib/apt/lists/*
 
-# Seems to be required or ELM builds can fail with
-#    FailedConnectionException2 "github.com" 443 True getProtocolByName: does not exist (no such protocol name: tcp)
-RUN apt-get -yqq install netbase
 
 WORKDIR /app
