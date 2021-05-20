@@ -19,7 +19,7 @@ RUN \
 
 # Install postgresql client for load/dump
 RUN curl -sS -o - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -  && \
-    echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
     apt-get -yqq update && \
     apt-get -yqq install postgresql-client-12 && \
     rm -rf /var/lib/apt/lists/*
