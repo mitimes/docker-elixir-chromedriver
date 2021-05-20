@@ -1,20 +1,28 @@
 FROM elixir:1.11
 
-#
-#
 # Add Elixir tools hex and rebar
 # ... and libs required when building code from Elixir packages
 # ... and netcat for scripts
 # ... postgresql-client for ecto.load sql schema
 # ... netbase - for ELM builds, else fails withFailedConnectionException2 "github.com" 443 True getProtocolByName: does not exist (no such protocol name: tcp)
+# ... locales - to allow setting locale
+# ... xvfb and other bits for cypress
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y \
     unzip curl wget git make build-essential libfontconfig1 \
     erlang-tools netcat \
-    postgresql-client \
-    netbase
+    netbase \
+    locales \
+    xvfb libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
+
+# Install postgresql client for load/dump
+RUN curl -sS -o - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -  && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
+    apt-get -yqq update && \
+    apt-get -yqq install postgresql-client-12 && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN mix do \
   local.hex --force, \
@@ -42,21 +50,11 @@ RUN \
 # Set the locale
 #
 #
-run apt-get install -y locales
 RUN sed -i -e 's/# \(en_AU\.UTF-8 .*\)/\1/' /etc/locale.gen && \
     locale-gen en_AU.UTF-8
 ENV LANG en_AU.UTF-8
 ENV LANGUAGE en_AU:en
 ENV LC_ALL en_AU.UTF-8
-
-#
-#
-# Cypress dependencies (including xvfb)
-#
-#
-RUN apt-get install -y \
-  xvfb \
-  libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 
 #
 #
