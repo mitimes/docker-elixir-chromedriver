@@ -40,7 +40,7 @@ RUN \
 # Set the locale
 #
 #
-run apt-get install -y locales
+RUN apt-get install -y locales
 RUN sed -i -e 's/# \(en_AU\.UTF-8 .*\)/\1/' /etc/locale.gen && \
     locale-gen en_AU.UTF-8
 ENV LANG en_AU.UTF-8
