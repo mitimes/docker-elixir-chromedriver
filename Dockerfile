@@ -1,4 +1,4 @@
-FROM elixir:1.11
+FROM elixir:1.13.1
 
 # Add Elixir tools hex and rebar
 # ... and libs required when building code from Elixir packages
