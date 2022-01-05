@@ -11,7 +11,7 @@ RUN \
   apt-get upgrade -y && \
   apt-get install -y \
     unzip curl wget git make build-essential libfontconfig1 \
-    erlang-tools netcat postgresql-client
+    erlang-tools netcat
 
 RUN mix do \
   local.hex --force, \
