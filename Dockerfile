@@ -1,12 +1,11 @@
 FROM elixir:1.13.1
-
 # Add Elixir tools hex and rebar
 # ... and libs required when building code from Elixir packages
 # ... and netcat for scripts
 # ... postgresql-client for ecto.load sql schema
 # ... netbase - for ELM builds, else fails withFailedConnectionException2 "github.com" 443 True getProtocolByName: does not exist (no such protocol name: tcp)
 # ... locales - to allow setting locale
-# ... xvfb and other bits for cypress
+# ... xvfb (X11 display) and other bits for cypress
 RUN \
   apt-get update && \
   apt-get upgrade -y && \
