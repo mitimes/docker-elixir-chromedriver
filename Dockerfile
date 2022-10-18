@@ -16,6 +16,8 @@ RUN \
     locales \
     xvfb libgtk2.0-0 libgtk-3-0 libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 
+RUN echo "ABC"
+
 # Install postgresql client for load/dump
 RUN curl -sS -o - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -  && \
     echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" >> /etc/apt/sources.list.d/pgdg.list && \
